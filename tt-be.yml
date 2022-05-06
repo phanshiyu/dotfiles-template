@@ -1,8 +1,11 @@
 ---
 - hosts: localhost
+  vars:
+    organization: govtech
+    project: tt
   tasks:
     - name: gcp
-      tags: tt-be
+      tags: "{{ organization }}/{{ project }}"
       vars:
         dir_name: .gcp
       block:
@@ -14,10 +17,10 @@
           copy:
             src: "{{ item }}"
             dest: "~/{{ dir_name }}"
-          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
+          loop: "{{ lookup('fileglob', './dotfiles/{{ organization }}/{{ project }}/{{ dir_name }}/*', wantlist=True) }}"
 
     - name: aws
-      tags: tt-be
+      tags: "{{ organization }}/{{ project }}"
       vars:
         dir_name: .aws
       block:
@@ -29,10 +32,10 @@
           copy:
             src: "{{ item }}"
             dest: "~/{{ dir_name }}"
-          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
+          loop: "{{ lookup('fileglob', './dotfiles/{{ organization }}/{{ project }}/{{ dir_name }}/*', wantlist=True) }}"
 
     - name: tt aws otp
-      tags: tt-be
+      tags: "{{ organization }}/{{ project }}"
       vars:
         dir_name: .tt_aws_otp
       block:
@@ -44,10 +47,10 @@
           copy:
             src: "{{ item }}"
             dest: "~/{{ dir_name }}"
-          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
+          loop: "{{ lookup('fileglob', './dotfiles/{{ organization }}/{{ project }}/{{ dir_name }}/*', wantlist=True) }}"
 
     - name: ssh
-      tags: tt-be
+      tags: "{{ organization }}/{{ project }}"
       vars:
         dir_name: .ssh
       block:
@@ -59,4 +62,4 @@
           copy:
             src: "{{ item }}"
             dest: "~/{{ dir_name }}"
-          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
+          loop: "{{ lookup('fileglob', './dotfiles/{{ organization }}/{{ project }}/{{ dir_name }}/*', wantlist=True) }}"
