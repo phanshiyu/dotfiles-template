@@ -52,6 +52,24 @@ ansible-pull -U {REPO_URL} playbook.yml --vault-password-file .ansible-credentia
 ```
 
 This will execute the `playbook.yml`, which in turn execute `tt-be.yml`
+Ansible is smart enough to know if your dot files are encrypted or not, and will decrypt using the given credentials automatically.
+
+## Updating your encrypted files
+
+Personally i'll just decrypt it first, for example if i want to edit `./dotfiles/govtech/tt/.aws/config`
+
+```
+ansible-vault decrypt ./dotfiles/govtech/tt/.aws/config
+```
+
+This will decrypt it into plaintext so i can update it.
+Then i'll run
+
+```
+ansible-vault encrypt ./dotfiles/govtech/tt/.aws/config
+```
+
+with the same password. git add, git commit and push.
 
 ## Extending to other projects
 
@@ -63,3 +81,5 @@ This will execute the `playbook.yml`, which in turn execute `tt-be.yml`
 ```
 ansible-pull -U {REPO_URL} playbook.yml --vault-password-file .ansible-credentials --tags {ORGANIZATION}/{PROJECT}
 ```
+
+remember to add the tags flag so that you only install credentials for that `{ORGANIZATION}/{PROJECT}`!
