@@ -43,6 +43,7 @@
           file:
             path: "~/{{ dir_name }}"
             state: directory
+            mode: "0700"
         - name: copying files
           copy:
             src: "{{ item }}"
@@ -62,4 +63,5 @@
           copy:
             src: "{{ item }}"
             dest: "~/{{ dir_name }}"
+            mode: "0400"
           loop: "{{ lookup('fileglob', './dotfiles/{{ organization }}/{{ project }}/{{ dir_name }}/*', wantlist=True) }}"
