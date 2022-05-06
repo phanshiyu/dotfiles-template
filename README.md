@@ -40,6 +40,10 @@ ansible-vault encrypt ./dotfiles/.tt_aws_otp/*
 
 I use the same password for all of them.
 
+## Create a repo
+
+Push all your files to your own repo. This can be private or public its up to you. Private just means you will have to set up your github ssh keys first before you can do the next step.
+
 ## Usage
 
 In the host that you want to port your dot files over, do:
