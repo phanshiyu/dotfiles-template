@@ -1,0 +1,62 @@
+---
+- hosts: localhost
+  tasks:
+    - name: gcp
+      tags: tt-be
+      vars:
+        dir_name: .gcp
+      block:
+        - name: "create ~/{{ dir_name }}"
+          file:
+            path: "~/{{ dir_name }}"
+            state: directory
+        - name: copying files
+          copy:
+            src: "{{ item }}"
+            dest: "~/{{ dir_name }}"
+          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
+
+    - name: aws
+      tags: tt-be
+      vars:
+        dir_name: .aws
+      block:
+        - name: "create ~/{{ dir_name }}"
+          file:
+            path: "~/{{ dir_name }}"
+            state: directory
+        - name: copying files
+          copy:
+            src: "{{ item }}"
+            dest: "~/{{ dir_name }}"
+          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
+
+    - name: tt aws otp
+      tags: tt-be
+      vars:
+        dir_name: .tt_aws_otp
+      block:
+        - name: "create ~/{{ dir_name }}"
+          file:
+            path: "~/{{ dir_name }}"
+            state: directory
+        - name: copying files
+          copy:
+            src: "{{ item }}"
+            dest: "~/{{ dir_name }}"
+          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
+
+    - name: ssh
+      tags: tt-be
+      vars:
+        dir_name: .ssh
+      block:
+        - name: "create ~/{{ dir_name }}"
+          file:
+            path: "~/{{ dir_name }}"
+            state: directory
+        - name: copying files
+          copy:
+            src: "{{ item }}"
+            dest: "~/{{ dir_name }}"
+          loop: "{{ lookup('fileglob', './dotfiles/govtech/tt/{{ dir_name }}/*', wantlist=True) }}"
